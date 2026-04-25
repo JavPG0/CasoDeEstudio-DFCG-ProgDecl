@@ -3,7 +3,7 @@
 
 iniciar :-
     nl,
-    write(' Analizador de frases en castellano '), nl,
+    write('Analizador de frases en castellano'), nl,
     bucle.
 
 bucle :-
@@ -32,7 +32,6 @@ procesar_entrada(Texto) :-
         bucle
     ).
 
-% --- CAMBIO: adaptado para aislar el punto ---
 texto_a_lista(Texto, ListaAtoms) :-
     replace_string(Texto, ".", " . ", TextoConPunto),
     split_string(TextoConPunto, " ", " ,;:!?¡¿\"'()", ListaStrings),
@@ -42,13 +41,13 @@ texto_a_lista(Texto, ListaAtoms) :-
 replace_string(String, Buscar, Reemplazar, Resultado) :-
     split_string(String, Buscar, "", Partes),
     atomics_to_string(Partes, Reemplazar, Resultado).
-% ---------------------------------------------------------
 
 comprobar_frase(Lista) :-
     ( phrase(oracion(Arbol), Lista) ->
-        write('--> FRASE CORRECTA. <-- '), nl,
-        write('Arbol sintactico: '), nl,
-        write(Arbol), nl
+        write('--> FRASE CORRECTA. <--'), nl,
+        write('Arbol sintactico (termino Prolog):'), nl,
+        write(Arbol), nl,
+        mostrar_arbol(Arbol)
     ;
         write('Frase incorrecta o no reconocida por la gramatica.'), nl
     ),
